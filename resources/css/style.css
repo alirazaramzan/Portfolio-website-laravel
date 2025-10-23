@@ -1,0 +1,30 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.hero {
+    background: linear-gradient(120deg, #f8f9fa, #e9ecef);
+    height: 100vh;
+    padding-top: 100px;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+footer {
+    background: #f8f9fa;
+}
+
+.no-link {
+    text-decoration: none;       /* removes underline */
+    color: inherit;              /* keeps normal text color */
+    display: block;              /* ensures the link covers full card area */
+}
+
+.no-link::after {
+    text-decoration: none;
+    color: inherit;
+}
