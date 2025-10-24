@@ -7,48 +7,60 @@
         <h2 class="text-center mb-4 fw-bold">My Design Projects</h2>
         <div class="row g-4">
 
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('images/img1.avif') }}" class="card-img-top" alt="BYKEA App Redesign">
-                    <a href="https://www.behance.net/gallery/206850249/BYKEA-App-Redesigned-Case-Study-Concept" class="no-link" target="_blank">
-                        <div class="card-body">
-                            <h5 class="card-title">BYKEA App Redesign</h5>
-                            <p class="card-text">
-                                To enhance the user experience and improve overall customer satisfaction by redesigning the Bykea app to be more intuitive and visually appealing.
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            @php
+                $projects = [
+                    [
+                        'id' => 1,
+                        'name' => 'BYKEA App Redesign',
+                        'price' => 200,
+                        'image' => 'images/img1.avif',
+                        'link' => 'https://www.behance.net/gallery/206850249/BYKEA-App-Redesigned-Case-Study-Concept',
+                        'desc' => 'Enhancing UX and visual appeal of Bykea app.'
+                    ],
+                    [
+                        'id' => 2,
+                        'name' => 'Employee Dashboard Design',
+                        'price' => 150,
+                        'image' => 'images/img44.png',
+                        'link' => 'https://www.behance.net/gallery/209078369/Employee-Dashboard-Design-UIUX',
+                        'desc' => 'Streamlined HR and analytics dashboard.'
+                    ],
+                    [
+                        'id' => 3,
+                        'name' => 'Financial Dashboard',
+                        'price' => 250,
+                        'image' => 'images/img33.png',
+                        'link' => 'https://www.behance.net/gallery/229698345/Financial-Dashboard-Figma',
+                        'desc' => 'Tracks revenue, expenses, and key metrics.'
+                    ],
+                ];
+            @endphp
 
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('images/img44.png') }}" class="card-img-top" alt="Employee Dashboard Design">
-                    <a href="https://www.behance.net/gallery/209078369/Employee-Dashboard-Design-UIUX" class="no-link" target="_blank">
-                        <div class="card-body">
-                            <h5 class="card-title">Employee Dashboard Design</h5>
-                            <p class="card-text">
-                                An intuitive interface that streamlines employee data management, showcasing attendance, performance, and HR analytics for better workforce visibility and decision-making.
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            @foreach ($projects as $project)
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ asset($project['image']) }}" class="card-img-top" alt="{{ $project['name'] }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $project['name'] }}</h5>
+                            <p class="card-text">{{ $project['desc'] }}</p>
+                            <p class="fw-bold">${{ $project['price'] }}</p>
 
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('images/img33.png') }}" class="card-img-top" alt="Financial Dashboard">
-                    <a href="https://www.behance.net/gallery/229698345/Financial-Dashboard-Figma" class="no-link" target="_blank">
-                        <div class="card-body">
-                            <h5 class="card-title">Financial Dashboard</h5>
-                            <p class="card-text">
-                                A data-driven dashboard that visualizes key financial metrics, helping users track revenue, expenses, and overall business performance with clarity and real-time insights.
-                            </p>
+                            <form action="{{ route('cart.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $project['id'] }}">
+                                <input type="hidden" name="name" value="{{ $project['name'] }}">
+                                <input type="hidden" name="price" value="{{ $project['price'] }}">
+                                <button type="submit" class="btn btn-dark btn-sm mt-2">Add to Cart</button>
+                            </form>
                         </div>
-                    </a>
+                    </div>
                 </div>
-            </div>
+            @endforeach
 
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ route('cart.view') }}" class="btn btn-outline-dark">View Cart →</a>
         </div>
     </section>
 @endsection
