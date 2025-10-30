@@ -28,15 +28,15 @@
                     @php $total += $item['price'] * $item['quantity']; @endphp
                     <tr>
                         <td>{{ $item['name'] }}</td>
-                        <td>${{ $item['price'] }}</td>
+                        <td>PKR{{ $item['price'] }}</td>
                         <td>{{ $item['quantity'] }}</td>
-                        <td>${{ $item['price'] * $item['quantity'] }}</td>
+                        <td>PKR{{ $item['price'] * $item['quantity'] }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
-            <h4 class="text-end mt-3">Total: ${{ $total }}</h4>
+            <h4 class="text-end mt-3">Total: PKR{{ $total }}</h4>
 
             <div class="text-end mt-3">
                 <a href="{{ route('cart.checkout.form') }}" class="btn btn-success">Proceed to Checkout</a>

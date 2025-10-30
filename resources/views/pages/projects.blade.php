@@ -12,7 +12,7 @@
                     [
                         'id' => 1,
                         'name' => 'BYKEA App Redesign',
-                        'price' => 200,
+                        'price' => 20000,
                         'image' => 'images/img1.avif',
                         'link' => 'https://www.behance.net/gallery/206850249/BYKEA-App-Redesigned-Case-Study-Concept',
                         'desc' => 'Enhancing UX and visual appeal of Bykea app.'
@@ -20,7 +20,7 @@
                     [
                         'id' => 2,
                         'name' => 'Employee Dashboard Design',
-                        'price' => 150,
+                        'price' => 15000,
                         'image' => 'images/img44.png',
                         'link' => 'https://www.behance.net/gallery/209078369/Employee-Dashboard-Design-UIUX',
                         'desc' => 'Streamlined HR and analytics dashboard.'
@@ -28,7 +28,7 @@
                     [
                         'id' => 3,
                         'name' => 'Financial Dashboard',
-                        'price' => 250,
+                        'price' => 25000,
                         'image' => 'images/img33.png',
                         'link' => 'https://www.behance.net/gallery/229698345/Financial-Dashboard-Figma',
                         'desc' => 'Tracks revenue, expenses, and key metrics.'
@@ -38,12 +38,13 @@
 
             @foreach ($projects as $project)
                 <div class="col-md-4">
+
                     <div class="card shadow-sm">
                         <img src="{{ asset($project['image']) }}" class="card-img-top" alt="{{ $project['name'] }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ $project['name'] }}</h5>
                             <p class="card-text">{{ $project['desc'] }}</p>
-                            <p class="fw-bold">${{ $project['price'] }}</p>
+                            <p class="fw-bold">PKR {{ $project['price'] }}</p>
 
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @csrf
