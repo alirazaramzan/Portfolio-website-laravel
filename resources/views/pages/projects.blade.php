@@ -38,7 +38,6 @@
 
             @foreach ($projects as $project)
                 <div class="col-md-4">
-
                     <div class="card shadow-sm">
                         <img src="{{ asset($project['image']) }}" class="card-img-top" alt="{{ $project['name'] }}">
                         <div class="card-body text-center">
@@ -46,6 +45,12 @@
                             <p class="card-text">{{ $project['desc'] }}</p>
                             <p class="fw-bold">PKR {{ $project['price'] }}</p>
 
+                            <!-- ⭐ View Details Button (NEW) -->
+                            <a href="{{ route('products.show', $project['id']) }}" class="btn btn-outline-primary btn-sm mb-2">
+                                View Details
+                            </a>
+
+                            <!-- Add to Cart -->
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $project['id'] }}">

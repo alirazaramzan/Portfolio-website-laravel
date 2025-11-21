@@ -9,6 +9,11 @@ class CartController extends Controller
     /**
      * Show the cart page.
      */
+    public function index()
+    {
+        $cart = session()->get('cart', []);
+        return view('cart', compact('cart')); // Make sure this matches your Blade file
+    }
     public function view()
     {
         $cart = session()->get('cart', []);
@@ -92,4 +97,38 @@ class CartController extends Controller
 
         return redirect()->route('cart.view')->with('success', 'Checkout completed successfully!');
     }
+
+    public function update(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $index = $request->id;   // this is the array index of the item
+        $action = $request->action;
+
+        if (!isset($cart[$index])) {
+            return response()->json(['error' => 'Item not found']);
+        }
+
+        // Update quantity
+        if ($action === 'plus') {
+            $cart[$index]['quantity'] += 1;
+        } elseif ($action === 'minus') {
+            if ($cart[$index]['quantity'] > 1) {
+                $cart[$index]['quantity'] -= 1;
+            }
+        }
+
+        // Save back to session
+        session()->put('cart', $cart);
+
+        // Recalculate totals
+        $itemTotal = $cart[$index]['price'] * $cart[$index]['quantity'];
+        $cartTotal = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+
+        return response()->json([
+            'quantity' => $cart[$index]['quantity'],
+            'item_total' => $itemTotal,
+            'cart_total' => $cartTotal
+        ]);
+    }
+
 }

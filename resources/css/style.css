@@ -16,6 +16,8 @@
 
 footer {
     background: #f8f9fa;
+        text-align: center;
+        padding: 1rem;
 }
 
 .no-link {
